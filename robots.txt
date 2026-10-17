@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://scalehavenconsulting.com/sitemap.xml
+Sitemap: https://www.scalehaven-consulting.com/sitemap.xml

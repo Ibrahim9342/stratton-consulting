@@ -8,14 +8,14 @@ LEGAL = "Scalehaven Operations LLC"
 STREET = "30 N. Gould St., #69980"
 CITY = "Sheridan, WY 82801"
 COUNTRY = "United States"
-EMAIL = "info@scalehavenconsulting.com"
+EMAIL = "info@scalehaven-consulting.com"
 PHONE = "+1 (917) 814-3761"
 PHONE_TEL = "+19178143761"
-DOMAIN = "scalehavenconsulting.com"
+DOMAIN = "scalehaven-consulting.com"
 OWNER = "Ibrahim Khaleel Mirza"
 OWNER_TITLE = "Founder &amp; Managing Partner"
 EFFECTIVE = "October 17, 2026"
-URL = f"https://{DOMAIN}"
+URL = f"https://www.{DOMAIN}"
 
 ARROW = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg>'
 CHECK = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5"/></svg>'
