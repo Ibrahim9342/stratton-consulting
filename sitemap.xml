@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://{{DOMAIN}}/</loc><lastmod>2026-10-17</lastmod></url>
-  <url><loc>https://{{DOMAIN}}/privacy</loc><lastmod>2026-10-17</lastmod></url>
-  <url><loc>https://{{DOMAIN}}/terms</loc><lastmod>2026-10-17</lastmod></url>
-  <url><loc>https://{{DOMAIN}}/legal-notice</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://scalehavenconsulting.com/</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://scalehavenconsulting.com/services</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://scalehavenconsulting.com/approach</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://scalehavenconsulting.com/about</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://scalehavenconsulting.com/contact</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://scalehavenconsulting.com/privacy</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://scalehavenconsulting.com/terms</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://scalehavenconsulting.com/legal-notice</loc><lastmod>2026-10-17</lastmod></url>
 </urlset>

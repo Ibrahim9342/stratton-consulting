@@ -64,6 +64,7 @@
       var body = [
         "Name: " + name,
         "Email: " + data.get("email"),
+        "Phone: " + (data.get("phone") || "–"),
         "Company: " + (data.get("company") || "–"),
         "Role: " + (data.get("role") || "–"),
         "Area of interest: " + (data.get("interest") || "–"),
