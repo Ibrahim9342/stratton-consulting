@@ -1,1422 +1,449 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="no-js">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Stratton Consulting – Strategy & Management Consulting</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet"/>
-  <style>
-    :root {
-      --navy: #0a1628;
-      --navy-light: #121f36;
-      --navy-mid: #1a2942;
-      --white: #ffffff;
-      --gray-50: #f8f9fb;
-      --gray-100: #eef1f5;
-      --gray-200: #dde2ea;
-      --gray-400: #9aa5b8;
-      --gray-500: #6b7a90;
-      --gray-600: #4a5568;
-      --accent: #2563eb;
-      --accent-light: #3b82f6;
-      --accent-dark: #1d4ed8;
-      --accent-glow: rgba(37, 99, 235, 0.15);
-      --gold: #d4a017;
-      --gold-light: #f0c040;
-      --radius: 12px;
-      --radius-lg: 20px;
-      --shadow: 0 4px 24px rgba(0,0,0,0.06);
-      --shadow-lg: 0 12px 48px rgba(0,0,0,0.1);
-      --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'Inter', -apple-system, sans-serif;
-      color: var(--navy);
-      background: var(--white);
-      line-height: 1.7;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    /* ── NAVBAR ── */
-    .navbar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 1000;
-      background: rgba(255,255,255,0.92);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgba(0,0,0,0.06);
-      transition: var(--transition);
-    }
-    .navbar.scrolled {
-      box-shadow: 0 2px 20px rgba(0,0,0,0.08);
-    }
-    .nav-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 72px;
-    }
-    .nav-logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--navy);
-      text-decoration: none;
-      letter-spacing: -0.5px;
-    }
-    .nav-logo span { color: var(--accent); }
-    .nav-links {
-      display: flex;
-      list-style: none;
-      gap: 32px;
-    }
-    .nav-links a {
-      text-decoration: none;
-      color: var(--gray-600);
-      font-size: 0.9rem;
-      font-weight: 500;
-      transition: var(--transition);
-      position: relative;
-    }
-    .nav-links a:hover { color: var(--navy); }
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: -4px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: var(--accent);
-      transition: var(--transition);
-    }
-    .nav-links a:hover::after { width: 100%; }
-    .nav-cta {
-      background: var(--accent);
-      color: var(--white);
-      padding: 10px 24px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-size: 0.9rem;
-      font-weight: 600;
-      transition: var(--transition);
-    }
-    .nav-cta:hover {
-      background: var(--accent-dark);
-      transform: translateY(-1px);
-      box-shadow: 0 4px 16px rgba(37,99,235,0.3);
-    }
-    .hamburger {
-      display: none;
-      background: none;
-      border: none;
-      font-size: 1.5rem;
-      cursor: pointer;
-      color: var(--navy);
-    }
-
-    /* ── HERO ── */
-    .hero {
-      position: relative;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 50%, #0f2444 100%);
-      overflow: hidden;
-      padding-top: 72px;
-    }
-    .hero-grid-bg {
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-      background-size: 60px 60px;
-    }
-    .hero-glow {
-      position: absolute;
-      width: 600px;
-      height: 600px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(37,99,235,0.15) 0%, transparent 70%);
-      top: -100px;
-      right: -100px;
-    }
-    .hero-glow-2 {
-      position: absolute;
-      width: 400px;
-      height: 400px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(212,160,23,0.08) 0%, transparent 70%);
-      bottom: -50px;
-      left: -50px;
-    }
-    .hero-body {
-      position: relative;
-      z-index: 2;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 80px 24px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: center;
-    }
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(37,99,235,0.12);
-      border: 1px solid rgba(37,99,235,0.2);
-      padding: 6px 16px;
-      border-radius: 100px;
-      color: var(--accent-light);
-      font-size: 0.8rem;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-      margin-bottom: 32px;
-    }
-    .hero-badge::before {
-      content: '';
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--accent-light);
-      animation: pulse-dot 2s infinite;
-    }
-    @keyframes pulse-dot {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.4; }
-    }
-    .hero h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.5rem, 5vw, 4rem);
-      font-weight: 700;
-      color: var(--white);
-      line-height: 1.15;
-      margin-bottom: 24px;
-    }
-    .hero h1 em {
-      font-style: italic;
-      color: var(--accent-light);
-    }
-    .hero-lead {
-      color: var(--gray-400);
-      font-size: 1.15rem;
-      line-height: 1.8;
-      margin-bottom: 40px;
-      max-width: 520px;
-    }
-    .hero-ctas {
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-    .btn-primary {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--accent);
-      color: var(--white);
-      padding: 14px 32px;
-      border-radius: 10px;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 0.95rem;
-      border: none;
-      cursor: pointer;
-      transition: var(--transition);
-    }
-    .btn-primary:hover {
-      background: var(--accent-dark);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(37,99,235,0.35);
-    }
-    .btn-outline {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: transparent;
-      color: var(--white);
-      padding: 14px 32px;
-      border-radius: 10px;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 0.95rem;
-      border: 1px solid rgba(255,255,255,0.2);
-      cursor: pointer;
-      transition: var(--transition);
-    }
-    .btn-outline:hover {
-      background: rgba(255,255,255,0.08);
-      border-color: rgba(255,255,255,0.4);
-    }
-    .hero-stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-      margin-top: 60px;
-    }
-    .stat { text-align: left; }
-    .stat-num {
-      display: block;
-      font-size: 2.2rem;
-      font-weight: 800;
-      color: var(--white);
-      line-height: 1;
-    }
-    .stat-label {
-      color: var(--gray-400);
-      font-size: 0.85rem;
-      margin-top: 4px;
-    }
-    .hero-visual { position: relative; }
-    .hero-card {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: var(--radius-lg);
-      padding: 40px;
-      backdrop-filter: blur(8px);
-    }
-    .hero-card-header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 32px;
-    }
-    .hero-card-dot {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-    }
-    .hero-card-bar {
-      display: flex;
-      align-items: flex-end;
-      gap: 8px;
-      height: 160px;
-      margin-bottom: 24px;
-    }
-    .bar {
-      flex: 1;
-      border-radius: 6px 6px 0 0;
-      transition: var(--transition);
-    }
-    .bar:hover { opacity: 0.8; filter: brightness(1.1); }
-    .hero-card-metrics {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-    .metric {
-      background: rgba(255,255,255,0.04);
-      border-radius: var(--radius);
-      padding: 16px;
-    }
-    .metric-val {
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: var(--white);
-    }
-    .metric-label {
-      font-size: 0.78rem;
-      color: var(--gray-400);
-      margin-top: 2px;
-    }
-    .metric-up {
-      color: #22c55e;
-      font-size: 0.78rem;
-      font-weight: 600;
-    }
-
-    /* ── TRUST BAR ── */
-    .trust-bar {
-      background: var(--gray-50);
-      border-top: 1px solid var(--gray-100);
-      border-bottom: 1px solid var(--gray-100);
-      padding: 32px 24px;
-    }
-    .trust-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 48px;
-      flex-wrap: wrap;
-    }
-    .trust-label {
-      color: var(--gray-400);
-      font-size: 0.8rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-    .trust-logos {
-      display: flex;
-      gap: 40px;
-      align-items: center;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-    .trust-logo {
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--gray-400);
-      letter-spacing: -0.5px;
-      opacity: 0.5;
-      transition: var(--transition);
-    }
-    .trust-logo:hover { opacity: 0.8; }
-
-    /* ── SECTION UTILITY ── */
-    .section { padding: 100px 24px; }
-    .section-dark { background: var(--navy); color: var(--white); }
-    .section-gray { background: var(--gray-50); }
-    .section-inner { max-width: 1200px; margin: 0 auto; }
-    .section-label {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      color: var(--accent);
-      font-size: 0.82rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      margin-bottom: 16px;
-    }
-    .section-label::before {
-      content: '';
-      width: 32px;
-      height: 2px;
-      background: var(--accent);
-      border-radius: 2px;
-    }
-    .section-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2rem, 4vw, 2.8rem);
-      font-weight: 700;
-      line-height: 1.2;
-      margin-bottom: 16px;
-    }
-    .section-title em { font-style: italic; color: var(--accent); }
-    .section-desc {
-      color: var(--gray-500);
-      font-size: 1.05rem;
-      max-width: 560px;
-      line-height: 1.8;
-    }
-    .section-header-center {
-      text-align: center;
-      margin-bottom: 64px;
-    }
-    .section-header-center .section-desc { margin: 0 auto; }
-
-    /* ── SERVICES ── */
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-    }
-    .svc-card {
-      background: var(--white);
-      border: 1px solid var(--gray-100);
-      border-radius: var(--radius-lg);
-      padding: 40px 32px;
-      transition: var(--transition);
-      position: relative;
-      overflow: hidden;
-    }
-    .svc-card:hover {
-      border-color: var(--accent);
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-lg), 0 0 0 1px var(--accent);
-    }
-    .svc-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-      background: var(--accent);
-      opacity: 0;
-      transition: var(--transition);
-    }
-    .svc-card:hover::before { opacity: 1; }
-    .svc-icon {
-      width: 56px;
-      height: 56px;
-      border-radius: 14px;
-      background: var(--accent-glow);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.4rem;
-      margin-bottom: 24px;
-    }
-    .svc-card h3 {
-      font-size: 1.2rem;
-      font-weight: 700;
-      margin-bottom: 12px;
-      color: var(--navy);
-    }
-    .svc-card p {
-      color: var(--gray-500);
-      font-size: 0.92rem;
-      line-height: 1.7;
-      margin-bottom: 20px;
-    }
-    .svc-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      color: var(--accent);
-      font-size: 0.88rem;
-      font-weight: 600;
-      text-decoration: none;
-      transition: var(--transition);
-    }
-    .svc-link:hover { gap: 10px; }
-
-    /* ── ABOUT ── */
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: center;
-    }
-    .about-img-wrap { position: relative; }
-    .about-img {
-      width: 100%;
-      aspect-ratio: 4/5;
-      border-radius: var(--radius-lg);
-      background: linear-gradient(135deg, var(--navy-light) 0%, var(--navy-mid) 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-    .about-img-pattern {
-      position: absolute;
-      inset: 0;
-      background-image:
-        radial-gradient(circle at 20% 50%, rgba(37,99,235,0.1) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(212,160,23,0.08) 0%, transparent 50%);
-    }
-    .about-img-text {
-      position: relative;
-      z-index: 1;
-      text-align: center;
-      padding: 40px;
-    }
-    .about-img-text .big-number {
-      font-size: 5rem;
-      font-weight: 800;
-      color: var(--white);
-      line-height: 1;
-    }
-    .about-img-text .big-label {
-      font-size: 1.1rem;
-      color: var(--gray-400);
-      margin-top: 8px;
-    }
-    .about-float-card {
-      position: absolute;
-      bottom: -20px;
-      right: -20px;
-      background: var(--white);
-      border-radius: var(--radius);
-      padding: 20px 24px;
-      box-shadow: var(--shadow-lg);
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .about-float-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 10px;
-      background: var(--accent-glow);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.2rem;
-    }
-    .about-float-text strong { display: block; font-size: 0.95rem; }
-    .about-float-text span { font-size: 0.8rem; color: var(--gray-500); }
-    .about-features {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-      margin: 32px 0;
-    }
-    .about-feat {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-    }
-    .about-feat-check {
-      width: 24px;
-      height: 24px;
-      border-radius: 6px;
-      background: var(--accent-glow);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      margin-top: 2px;
-    }
-    .about-feat-check svg { width: 14px; height: 14px; }
-    .about-feat span {
-      font-size: 0.92rem;
-      font-weight: 500;
-      color: var(--gray-600);
-    }
-
-    /* ── PROCESS ── */
-    .process-steps {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 32px;
-      position: relative;
-    }
-    .process-steps::before {
-      content: '';
-      position: absolute;
-      top: 40px;
-      left: 10%; right: 10%;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, var(--gray-200), var(--gray-200), transparent);
-    }
-    .step { text-align: center; position: relative; }
-    .step-num {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      background: var(--white);
-      border: 2px solid var(--gray-200);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 24px;
-      font-size: 1.5rem;
-      font-weight: 800;
-      color: var(--accent);
-      position: relative;
-      z-index: 1;
-      transition: var(--transition);
-    }
-    .step:hover .step-num {
-      background: var(--accent);
-      color: var(--white);
-      border-color: var(--accent);
-      transform: scale(1.1);
-      box-shadow: 0 8px 24px rgba(37,99,235,0.3);
-    }
-    .step h4 {
-      font-size: 1.05rem;
-      font-weight: 700;
-      margin-bottom: 8px;
-      color: var(--navy);
-    }
-    .step p {
-      font-size: 0.88rem;
-      color: var(--gray-500);
-      line-height: 1.6;
-    }
-
-    /* ── TESTIMONIALS ── */
-    .testimonials-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-    }
-    .testi-card {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: var(--radius-lg);
-      padding: 36px;
-      transition: var(--transition);
-    }
-    .testi-card:hover {
-      border-color: rgba(37,99,235,0.3);
-      background: rgba(255,255,255,0.06);
-    }
-    .testi-stars {
-      color: var(--gold);
-      font-size: 0.9rem;
-      margin-bottom: 16px;
-      letter-spacing: 2px;
-    }
-    .testi-text {
-      color: var(--gray-200);
-      font-size: 0.95rem;
-      line-height: 1.8;
-      margin-bottom: 24px;
-      font-style: italic;
-    }
-    .testi-author {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .testi-avatar {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 700;
-      font-size: 1rem;
-      color: var(--white);
-    }
-    .testi-name { font-weight: 600; color: var(--white); font-size: 0.92rem; }
-    .testi-role { font-size: 0.8rem; color: var(--gray-400); }
-
-    /* ── CTA SECTION ── */
-    .cta-section {
-      padding: 100px 24px;
-      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-    .cta-section::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image:
-        radial-gradient(circle at 20% 50%, rgba(255,255,255,0.08) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(255,255,255,0.05) 0%, transparent 50%);
-    }
-    .cta-inner {
-      position: relative;
-      z-index: 1;
-      max-width: 700px;
-      margin: 0 auto;
-    }
-    .cta-section h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2rem, 4vw, 2.8rem);
-      color: var(--white);
-      margin-bottom: 16px;
-    }
-    .cta-section p {
-      color: rgba(255,255,255,0.85);
-      font-size: 1.1rem;
-      margin-bottom: 36px;
-      line-height: 1.7;
-    }
-    .btn-white {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--white);
-      color: var(--accent-dark);
-      padding: 16px 36px;
-      border-radius: 10px;
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 1rem;
-      transition: var(--transition);
-    }
-    .btn-white:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
-    }
-
-    /* ── CONTACT ── */
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 64px;
-    }
-    .contact-cards {
-      display: grid;
-      gap: 16px;
-      margin-top: 32px;
-    }
-    .c-card {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      padding: 20px 24px;
-      border-radius: var(--radius);
-      border: 1px solid var(--gray-100);
-      transition: var(--transition);
-    }
-    .c-card:hover {
-      border-color: var(--accent);
-      background: var(--accent-glow);
-    }
-    .c-card-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 12px;
-      background: var(--accent-glow);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.2rem;
-      flex-shrink: 0;
-    }
-    .c-card strong { display: block; font-size: 0.92rem; color: var(--navy); }
-    .c-card span { font-size: 0.85rem; color: var(--gray-500); }
-    .contact-form {
-      background: var(--gray-50);
-      border-radius: var(--radius-lg);
-      padding: 40px;
-    }
-    .contact-form h3 {
-      font-size: 1.3rem;
-      font-weight: 700;
-      margin-bottom: 24px;
-      color: var(--navy);
-    }
-    .form-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-    .form-group { margin-bottom: 16px; }
-    .form-group label {
-      display: block;
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--navy);
-      margin-bottom: 6px;
-    }
-    .form-group input,
-    .form-group textarea,
-    .form-group select {
-      width: 100%;
-      padding: 12px 16px;
-      border: 1px solid var(--gray-200);
-      border-radius: 8px;
-      font-family: inherit;
-      font-size: 0.92rem;
-      background: var(--white);
-      transition: var(--transition);
-      color: var(--navy);
-    }
-    .form-group input:focus,
-    .form-group textarea:focus,
-    .form-group select:focus {
-      outline: none;
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px var(--accent-glow);
-    }
-    .form-group textarea { resize: vertical; min-height: 100px; }
-    .form-submit { width: 100%; margin-top: 8px; }
-
-    /* ── FOOTER ── */
-    .footer {
-      background: var(--navy);
-      padding: 64px 24px 32px;
-      color: var(--gray-400);
-    }
-    .footer-inner { max-width: 1200px; margin: 0 auto; }
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr 1fr;
-      gap: 48px;
-      margin-bottom: 48px;
-    }
-    .footer-brand .nav-logo {
-      color: var(--white);
-      display: inline-block;
-      margin-bottom: 16px;
-    }
-    .footer-brand p {
-      font-size: 0.88rem;
-      line-height: 1.7;
-      max-width: 300px;
-    }
-    .footer h5 {
-      color: var(--white);
-      font-size: 0.9rem;
-      font-weight: 700;
-      margin-bottom: 16px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    .footer a {
-      display: block;
-      color: var(--gray-400);
-      text-decoration: none;
-      font-size: 0.88rem;
-      padding: 4px 0;
-      transition: var(--transition);
-    }
-    .footer a:hover { color: var(--white); }
-    .footer-divider {
-      border-top: 1px solid rgba(255,255,255,0.08);
-      padding-top: 24px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 16px;
-    }
-    .footer-divider p { font-size: 0.82rem; }
-
-    /* ── SCROLL ANIMATIONS ── */
-    .fade-up {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-    .fade-up.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* ── MOBILE NAV ── */
-    .mobile-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(10,22,40,0.95);
-      backdrop-filter: blur(16px);
-      z-index: 999;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 24px;
-    }
-    .mobile-overlay.active { display: flex; }
-    .mobile-overlay a {
-      color: var(--white);
-      text-decoration: none;
-      font-size: 1.3rem;
-      font-weight: 600;
-      padding: 12px;
-      transition: var(--transition);
-    }
-    .mobile-overlay a:hover { color: var(--accent-light); }
-    .mobile-close {
-      position: absolute;
-      top: 24px;
-      right: 24px;
-      background: none;
-      border: none;
-      color: var(--white);
-      font-size: 2rem;
-      cursor: pointer;
-    }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 1024px) {
-      .hero-body { grid-template-columns: 1fr; gap: 48px; }
-      .hero-visual { display: none; }
-      .services-grid { grid-template-columns: repeat(2, 1fr); }
-      .about-grid { grid-template-columns: 1fr; gap: 48px; }
-      .process-steps { grid-template-columns: repeat(2, 1fr); }
-      .process-steps::before { display: none; }
-      .testimonials-grid { grid-template-columns: 1fr 1fr; }
-      .contact-grid { grid-template-columns: 1fr; }
-      .footer-grid { grid-template-columns: 1fr 1fr; }
-    }
-
-    @media (max-width: 768px) {
-      .nav-links, .nav-cta { display: none; }
-      .hamburger { display: block; }
-      .services-grid { grid-template-columns: 1fr; }
-      .process-steps { grid-template-columns: 1fr; }
-      .testimonials-grid { grid-template-columns: 1fr; }
-      .hero-stats { grid-template-columns: repeat(3, 1fr); gap: 12px; }
-      .stat-num { font-size: 1.6rem; }
-      .about-features { grid-template-columns: 1fr; }
-      .form-row { grid-template-columns: 1fr; }
-      .footer-grid { grid-template-columns: 1fr; }
-      .section { padding: 64px 16px; }
-    }
-  </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Stratton Consulting | Strategy &amp; Management Consulting</title>
+  <meta name="description" content="Stratton Consulting is an independent strategy and management consulting firm helping growing and mid-sized companies with growth strategy, operating models, digital transformation and transactions.">
+  <link rel="canonical" href="https://{{DOMAIN}}/">
+  <meta name="theme-color" content="#0c1a2a">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Stratton Consulting">
+  <meta property="og:title" content="Stratton Consulting | Strategy &amp; Management Consulting">
+  <meta property="og:description" content="Independent, senior-led strategy and management consulting for growing and mid-sized companies.">
+  <meta property="og:url" content="https://{{DOMAIN}}/">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="/assets/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/newsreader.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/assets/css/styles.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Stratton Consulting",
+    "legalName": "{{LEGAL_NAME}}",
+    "url": "https://{{DOMAIN}}/",
+    "email": "{{EMAIL}}",
+    "telephone": "{{PHONE_TEL}}",
+    "description": "Independent strategy and management consulting for growing and mid-sized companies."
+  }
+  </script>
+  <script src="/assets/js/main.js" defer></script>
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to content</a>
 
-<!-- ── NAVBAR ── -->
-<nav class="navbar" id="navbar">
-  <div class="nav-inner">
-    <a href="#home" class="nav-logo">Stratton<span>.</span></a>
-    <ul class="nav-links">
-      <li><a href="#services">Services</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#process">Process</a></li>
-      <li><a href="#testimonials">Testimonials</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-    <a href="#contact" class="nav-cta">Get a Consultation</a>
-    <button class="hamburger" id="hamburger" aria-label="Menu">&#9776;</button>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/" aria-label="Stratton Consulting – Home">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect width="34" height="34" rx="3" fill="#0c1a2a"/><rect x="8" y="19" width="4" height="8" fill="#c9a66b"/><rect x="15" y="14" width="4" height="13" fill="#c9a66b"/><rect x="22" y="8" width="4" height="19" fill="#ffffff"/></svg>
+      <span class="brand-name">Stratton<small>Consulting</small></span>
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu"><span></span></button>
+    <nav class="nav" id="site-nav" aria-label="Main">
+      <ul class="nav-list">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#approach">Approach</a></li>
+        <li><a href="#sectors">Sectors</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+      <a class="btn btn-primary btn-sm" href="#contact">Book a consultation</a>
+    </nav>
   </div>
-</nav>
+</header>
 
-<!-- Mobile overlay -->
-<div class="mobile-overlay" id="mobileNav">
-  <button class="mobile-close" id="mobileClose">&times;</button>
-  <a href="#services" class="mobile-link">Services</a>
-  <a href="#about" class="mobile-link">About</a>
-  <a href="#process" class="mobile-link">Process</a>
-  <a href="#testimonials" class="mobile-link">Testimonials</a>
-  <a href="#contact" class="mobile-link">Contact</a>
-</div>
+<main id="main">
 
-<!-- ── HERO ── -->
-<section class="hero" id="home">
-  <div class="hero-grid-bg"></div>
-  <div class="hero-glow"></div>
-  <div class="hero-glow-2"></div>
-  <div class="hero-body">
-    <div class="hero-content">
-      <div class="hero-badge">Strategy &amp; Business Transformation</div>
-      <h1>We shape the <em>future</em> of your business.</h1>
-      <p class="hero-lead">Stratton Consulting delivers strategic clarity and operational excellence. We partner with organizations to drive growth, digital transformation, and lasting change.</p>
-      <div class="hero-ctas">
-        <a href="#contact" class="btn-primary">Free Consultation &rarr;</a>
-        <a href="#services" class="btn-outline">Our Services</a>
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="wrap hero-inner">
+      <div>
+        <p class="eyebrow">Strategy &amp; Management Consulting</p>
+        <h1 class="display" id="hero-title">Clear strategy.<br>Disciplined <em>execution.</em></h1>
+        <p class="lead">Stratton Consulting advises executives and owners of growing and mid-sized companies on the decisions that shape their next decade&nbsp;&mdash; from growth strategy and operating model design to transformation and transactions.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#contact">Schedule a consultation <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
+          <a class="btn btn-ghost" href="#services">Explore our services</a>
+        </div>
+        <p class="hero-note"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M8 1.5l5.5 2v4c0 3.5-2.4 5.9-5.5 7-3.1-1.1-5.5-3.5-5.5-7v-4z"/><path d="M5.5 8l1.8 1.8L10.8 6.3"/></svg>Senior-led, confidential engagements. Mutual NDA on request.</p>
       </div>
-      <div class="hero-stats">
-        <div class="stat">
-          <span class="stat-num">200+</span>
-          <span class="stat-label">Projects delivered successfully</span>
-        </div>
-        <div class="stat">
-          <span class="stat-num">98%</span>
-          <span class="stat-label">Client satisfaction rate</span>
-        </div>
-        <div class="stat">
-          <span class="stat-num">15</span>
-          <span class="stat-label">Years of experience</span>
-        </div>
-      </div>
+      <aside class="hero-panel" aria-label="Where we help">
+        <p class="hero-panel-label">Where we help</p>
+        <h2>The questions leadership teams bring to us</h2>
+        <ol class="hero-questions">
+          <li><span>01</span>Where should we compete&nbsp;&mdash; and where should we stop?</li>
+          <li><span>02</span>Is our operating model built for the next stage of growth?</li>
+          <li><span>03</span>How do we turn a digital roadmap into real P&amp;L impact?</li>
+          <li><span>04</span>Should we buy, build or partner?</li>
+        </ol>
+      </aside>
     </div>
-    <div class="hero-visual">
-      <div class="hero-card">
-        <div class="hero-card-header">
-          <div class="hero-card-dot" style="background:#22c55e"></div>
-          <div class="hero-card-dot" style="background:#f59e0b"></div>
-          <div class="hero-card-dot" style="background:#ef4444"></div>
-          <span style="color:var(--gray-400);font-size:0.82rem;margin-left:auto">Performance Q3 2026</span>
-        </div>
-        <div class="hero-card-bar">
-          <div class="bar" style="height:45%;background:rgba(37,99,235,0.3)"></div>
-          <div class="bar" style="height:62%;background:rgba(37,99,235,0.4)"></div>
-          <div class="bar" style="height:38%;background:rgba(37,99,235,0.3)"></div>
-          <div class="bar" style="height:78%;background:rgba(37,99,235,0.5)"></div>
-          <div class="bar" style="height:55%;background:rgba(37,99,235,0.4)"></div>
-          <div class="bar" style="height:90%;background:var(--accent)"></div>
-          <div class="bar" style="height:72%;background:rgba(37,99,235,0.5)"></div>
-          <div class="bar" style="height:95%;background:var(--accent)"></div>
-        </div>
-        <div class="hero-card-metrics">
-          <div class="metric">
-            <div class="metric-val">+34%</div>
-            <div class="metric-label">Revenue Growth</div>
-            <div class="metric-up">&#9650; 12% vs. prior year</div>
-          </div>
-          <div class="metric">
-            <div class="metric-val">2.4x</div>
-            <div class="metric-label">ROI Increase</div>
-            <div class="metric-up">&#9650; Above industry avg.</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+  </section>
 
-<!-- ── TRUST BAR ── -->
-<div class="trust-bar">
-  <div class="trust-inner">
-    <span class="trust-label">Trusted by</span>
-    <div class="trust-logos">
-      <span class="trust-logo">MICROSOFT</span>
-      <span class="trust-logo">SALESFORCE</span>
-      <span class="trust-logo">JPMORGAN</span>
-      <span class="trust-logo">DELOITTE</span>
-      <span class="trust-logo">ORACLE</span>
-      <span class="trust-logo">CISCO</span>
+  <section class="strip" aria-label="How we are different">
+    <div class="wrap strip-grid">
+      <div class="strip-item reveal"><h3>Senior-led</h3><p>The people who scope your engagement are the people who do the work.</p></div>
+      <div class="strip-item reveal"><h3>Independent</h3><p>No software resale, no referral fees. Our only incentive is your outcome.</p></div>
+      <div class="strip-item reveal"><h3>Fixed-scope proposals</h3><p>Deliverables, timeline and fees agreed in writing before work begins.</p></div>
+      <div class="strip-item reveal"><h3>Built to last</h3><p>We document, train and hand over so results outlast our involvement.</p></div>
     </div>
-  </div>
-</div>
+  </section>
 
-<!-- ── SERVICES ── -->
-<section class="section" id="services">
-  <div class="section-inner">
-    <div class="section-header-center fade-up">
-      <div class="section-label">What We Do</div>
-      <h2 class="section-title">Our <em>Services</em></h2>
-      <p class="section-desc">Tailored consulting for every stage of your business growth &mdash; from strategy to execution.</p>
+  <section class="section" id="services" aria-labelledby="services-title">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <p class="eyebrow">Services</p>
+          <h2 class="h2" id="services-title">Advice for the decisions that <em>matter most</em></h2>
+        </div>
+        <p class="lead">We focus on a small number of disciplines and go deep. Each engagement is tailored to your situation, but always grounded in evidence and designed to be executed.</p>
+      </div>
+      <div class="services">
+        <article class="service reveal">
+          <span class="service-num">01</span>
+          <h3>Corporate &amp; Growth Strategy</h3>
+          <p>Define where to play and how to win, grounded in market evidence and a realistic view of your capabilities.</p>
+          <ul><li>Market and competitor analysis</li><li>Portfolio and growth options</li><li>Multi-year strategic plan</li></ul>
+        </article>
+        <article class="service reveal">
+          <span class="service-num">02</span>
+          <h3>Operating Model &amp; Performance</h3>
+          <p>Align structure, processes and metrics so your organization can actually deliver the strategy.</p>
+          <ul><li>Organization design</li><li>Cost and margin improvement</li><li>KPIs and management cadence</li></ul>
+        </article>
+        <article class="service reveal">
+          <span class="service-num">03</span>
+          <h3>Digital &amp; AI Strategy</h3>
+          <p>Translate technology and AI opportunities into a prioritized roadmap with clear business cases.</p>
+          <ul><li>Digital maturity assessment</li><li>AI and automation use cases</li><li>Vendor-neutral roadmap</li></ul>
+        </article>
+        <article class="service reveal">
+          <span class="service-num">04</span>
+          <h3>Transformation Management</h3>
+          <p>Run complex change programs with the governance, pace and discipline they need to land.</p>
+          <ul><li>Program and PMO set-up</li><li>Change management and communication</li><li>Benefit tracking</li></ul>
+        </article>
+        <article class="service reveal">
+          <span class="service-num">05</span>
+          <h3>Transactions &amp; Integration</h3>
+          <p>Support for buy-side and sell-side decisions, from commercial due diligence to post-merger integration.</p>
+          <ul><li>Commercial due diligence</li><li>Value creation plans</li><li>100-day integration planning</li></ul>
+        </article>
+        <article class="service reveal">
+          <span class="service-num">06</span>
+          <h3>Market Entry &amp; Expansion</h3>
+          <p>Plan and de-risk entry into new markets, customer segments or channels&nbsp;&mdash; in the U.S. and abroad.</p>
+          <ul><li>Market sizing and prioritization</li><li>Go-to-market design</li><li>Partner and location assessment</li></ul>
+        </article>
+      </div>
     </div>
-    <div class="services-grid">
-      <div class="svc-card fade-up">
-        <div class="svc-icon">&#x1F3AF;</div>
-        <h3>Strategy Consulting</h3>
-        <p>We develop clear strategies that capitalize on market opportunities and secure sustainable long-term growth.</p>
-        <a href="#contact" class="svc-link">Learn more &rarr;</a>
-      </div>
-      <div class="svc-card fade-up">
-        <div class="svc-icon">&#x1F504;</div>
-        <h3>Digital Transformation</h3>
-        <p>We guide your organization through digitalization &mdash; from process optimization to new business model development.</p>
-        <a href="#contact" class="svc-link">Learn more &rarr;</a>
-      </div>
-      <div class="svc-card fade-up">
-        <div class="svc-icon">&#x1F4C8;</div>
-        <h3>Performance Management</h3>
-        <p>We identify optimization potential and implement KPI-driven management systems for measurable results.</p>
-        <a href="#contact" class="svc-link">Learn more &rarr;</a>
-      </div>
-      <div class="svc-card fade-up">
-        <div class="svc-icon">&#x1F91D;</div>
-        <h3>Mergers &amp; Acquisitions</h3>
-        <p>From due diligence to post-merger integration &mdash; we ensure the success of your transactions at every step.</p>
-        <a href="#contact" class="svc-link">Learn more &rarr;</a>
-      </div>
-      <div class="svc-card fade-up">
-        <div class="svc-icon">&#x1F465;</div>
-        <h3>Organizational Development</h3>
-        <p>We design agile structures and develop leaders who drive meaningful, lasting organizational change.</p>
-        <a href="#contact" class="svc-link">Learn more &rarr;</a>
-      </div>
-      <div class="svc-card fade-up">
-        <div class="svc-icon">&#x1F30D;</div>
-        <h3>Market Expansion</h3>
-        <p>Go-to-market strategies, site analysis, and regulatory guidance for your domestic and international growth.</p>
-        <a href="#contact" class="svc-link">Learn more &rarr;</a>
-      </div>
-    </div>
-  </div>
-</section>
+  </section>
 
-<!-- ── ABOUT ── -->
-<section class="section section-gray" id="about">
-  <div class="section-inner">
-    <div class="about-grid">
-      <div class="about-img-wrap fade-up">
-        <div class="about-img">
-          <div class="about-img-pattern"></div>
-          <div class="about-img-text">
-            <div class="big-number">15+</div>
-            <div class="big-label">Years of Consulting Excellence</div>
-          </div>
+  <section class="section section-ink" id="approach" aria-labelledby="approach-title">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <p class="eyebrow">Our approach</p>
+          <h2 class="h2" id="approach-title">A structured path from <em>insight</em> to impact</h2>
         </div>
-        <div class="about-float-card">
-          <div class="about-float-icon">&#x2705;</div>
-          <div class="about-float-text">
-            <strong>SOC 2 Type II Certified</strong>
-            <span>Enterprise-grade security</span>
-          </div>
-        </div>
+        <p class="lead">Every engagement follows the same disciplined sequence, scaled to the size of the question. You always know where we are, what comes next and what it will deliver.</p>
       </div>
-      <div class="fade-up">
-        <div class="section-label">About Us</div>
-        <h2 class="section-title">Experience meets <em>Innovation</em></h2>
-        <p class="section-desc" style="margin-bottom:24px">Stratton Consulting was founded with the vision to reimagine management consulting &mdash; practical, data-driven, and focused on real impact.</p>
-        <p style="color:var(--gray-500);font-size:0.95rem;line-height:1.8;margin-bottom:24px">Our team of seasoned consultants combines deep industry expertise with cutting-edge methodologies. We believe lasting change only happens through close collaboration and trusted partnerships.</p>
-        <div class="about-features">
-          <div class="about-feat">
-            <div class="about-feat-check">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
-            </div>
-            <span>Cross-industry expertise</span>
-          </div>
-          <div class="about-feat">
-            <div class="about-feat-check">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
-            </div>
-            <span>Data-driven insights</span>
-          </div>
-          <div class="about-feat">
-            <div class="about-feat-check">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
-            </div>
-            <span>Tailored solutions</span>
-          </div>
-          <div class="about-feat">
-            <div class="about-feat-check">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
-            </div>
-            <span>Sustainable outcomes</span>
-          </div>
-        </div>
-        <a href="#contact" class="btn-primary" style="background:var(--accent)">Get to know us &rarr;</a>
-      </div>
+      <ol class="approach">
+        <li class="step reveal">
+          <div class="step-top"><span class="step-num">01</span><span class="step-line"></span></div>
+          <h3>Diagnose</h3>
+          <p>We interview leadership, analyze the data and pressure-test assumptions to build a fact base everyone trusts.</p>
+          <p class="step-meta">Weeks 1&ndash;3</p>
+        </li>
+        <li class="step reveal">
+          <div class="step-top"><span class="step-num">02</span><span class="step-line"></span></div>
+          <h3>Design</h3>
+          <p>Together we develop options, quantify trade-offs and agree on a clear direction with an actionable roadmap.</p>
+          <p class="step-meta">Weeks 3&ndash;6</p>
+        </li>
+        <li class="step reveal">
+          <div class="step-top"><span class="step-num">03</span><span class="step-line"></span></div>
+          <h3>Deliver</h3>
+          <p>We work alongside your team to implement&nbsp;&mdash; setting up governance, removing blockers and keeping momentum.</p>
+          <p class="step-meta">Months 2&ndash;6+</p>
+        </li>
+        <li class="step reveal">
+          <div class="step-top"><span class="step-num">04</span><span class="step-line"></span></div>
+          <h3>Sustain</h3>
+          <p>We measure results against the business case and transfer tools and know-how so improvements last.</p>
+          <p class="step-meta">Ongoing</p>
+        </li>
+      </ol>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ── PROCESS ── -->
-<section class="section" id="process">
-  <div class="section-inner">
-    <div class="section-header-center fade-up">
-      <div class="section-label">How We Work</div>
-      <h2 class="section-title">Our <em>Process</em></h2>
-      <p class="section-desc">Structured, transparent, and results-oriented &mdash; four steps to success.</p>
+  <section class="section" id="sectors" aria-labelledby="sectors-title">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <p class="eyebrow">Sectors</p>
+          <h2 class="h2" id="sectors-title">Context in the industries that drive the <em>mid-market</em></h2>
+        </div>
+        <p class="lead">Our methods travel across industries, but good advice depends on understanding how your market really works. These are the sectors we focus on.</p>
+      </div>
+      <div class="sectors">
+        <div class="sector reveal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="1"/><path d="M8 20h8M12 16v4"/></svg>
+          <div><h3>Technology &amp; Software</h3><p>SaaS, IT services and tech-enabled businesses scaling into new segments.</p></div>
+        </div>
+        <div class="sector reveal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M3 9l9-5 9 5M5 9v9M10 9v9M14 9v9M19 9v9M3 20h18"/></svg>
+          <div><h3>Financial Services</h3><p>Banks, insurers, fintechs and asset managers navigating regulatory and digital change.</p></div>
+        </div>
+        <div class="sector reveal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M9 3h6v6h6v6h-6v6H9v-6H3V9h6z"/></svg>
+          <div><h3>Healthcare &amp; Life Sciences</h3><p>Providers, practices and suppliers improving access, quality and margins.</p></div>
+        </div>
+        <div class="sector reveal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M3 21V10l6 4v-4l6 4V6l6 3v12z"/></svg>
+          <div><h3>Industrial &amp; Manufacturing</h3><p>Manufacturers and distributors modernizing operations and supply chains.</p></div>
+        </div>
+        <div class="sector reveal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M5 8h14l-1 13H6zM9 8V6a3 3 0 0 1 6 0v2"/></svg>
+          <div><h3>Consumer &amp; Retail</h3><p>Brands and retailers rethinking channels, pricing and customer experience.</p></div>
+        </div>
+        <div class="sector reveal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="1"/><path d="M9 7V4h6v3M3 12h18"/></svg>
+          <div><h3>Private Equity &amp; Owners</h3><p>Investors and family owners who need diligence, value creation and exit readiness.</p></div>
+        </div>
+      </div>
     </div>
-    <div class="process-steps">
-      <div class="step fade-up">
-        <div class="step-num">01</div>
-        <h4>Discovery</h4>
-        <p>Deep-dive assessment of your business, market position, competitive landscape, and core challenges.</p>
-      </div>
-      <div class="step fade-up">
-        <div class="step-num">02</div>
-        <h4>Strategy</h4>
-        <p>Development of tailored solutions with clear objectives, actionable roadmaps, and measurable milestones.</p>
-      </div>
-      <div class="step fade-up">
-        <div class="step-num">03</div>
-        <h4>Execution</h4>
-        <p>Hands-on implementation alongside your team &mdash; we guide every step of the transformation process.</p>
-      </div>
-      <div class="step fade-up">
-        <div class="step-num">04</div>
-        <h4>Results</h4>
-        <p>Measure outcomes, optimize performance, and transfer capabilities to your team for lasting success.</p>
-      </div>
-    </div>
-  </div>
-</section>
+  </section>
 
-<!-- ── TESTIMONIALS ── -->
-<section class="section section-dark" id="testimonials">
-  <div class="section-inner">
-    <div class="section-header-center fade-up">
-      <div class="section-label" style="color:var(--accent-light)">Testimonials</div>
-      <h2 class="section-title" style="color:var(--white)">What our <em>clients</em> say</h2>
-      <p class="section-desc" style="color:var(--gray-400)">Long-term partnerships and measurable results &mdash; that is our commitment.</p>
+  <section class="section section-paper" id="engagements" aria-labelledby="engagements-title">
+    <div class="wrap">
+      <div class="section-head-center reveal">
+        <p class="eyebrow">Ways to work with us</p>
+        <h2 class="h2" id="engagements-title">Engagement models that fit the <em>decision</em> in front of you</h2>
+        <p class="lead">Every engagement starts with a written proposal: clear scope, deliverables, timeline and fees&nbsp;&mdash; agreed before work begins.</p>
+      </div>
+      <div class="engagements">
+        <article class="engagement reveal">
+          <span class="engagement-tag">Focused</span>
+          <h3>Strategic Assessment</h3>
+          <p class="engagement-duration">Typically 2&ndash;4 weeks</p>
+          <p>A rapid, fact-based answer to one specific question&nbsp;&mdash; ideal before a major decision or investment.</p>
+          <ul>
+            <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5"/></svg>Leadership interviews and data analysis</li>
+            <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5"/></svg>Options with quantified trade-offs</li>
+            <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5"/></svg>Board-ready recommendation</li>
+          </ul>
+          <a class="btn btn-ghost" href="#contact">Discuss an assessment</a>
+        </article>
+        <article class="engagement is-featured reveal">
+          <span class="engagement-tag">Comprehensive</span>
+          <h3>Strategy &amp; Transformation</h3>
+          <p class="engagement-duration">Typically 3&ndash;9 months</p>
+          <p>End-to-end support from strategy design through implementation, with a dedicated senior team.</p>
+          <ul>
+            <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5"/></svg>Strategy and implementation roadmap</li>
+            <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5"/></svg>Program governance and PMO</li>
+            <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5"/></svg>Hands-on implementation support</li>
+            <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5"/></svg>Results tracking against the business case</li>
+          </ul>
+          <a class="btn btn-brass" href="#contact">Plan a program</a>
+        </article>
+        <article class="engagement reveal">
+          <span class="engagement-tag">Ongoing</span>
+          <h3>Executive Advisory</h3>
+          <p class="engagement-duration">Monthly retainer</p>
+          <p>An independent, trusted sounding board for CEOs, owners and leadership teams.</p>
+          <ul>
+            <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5"/></svg>Regular strategy sessions</li>
+            <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5"/></svg>On-call advice for critical decisions</li>
+            <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5"/></svg>Board and investor preparation</li>
+          </ul>
+          <a class="btn btn-ghost" href="#contact">Ask about advisory</a>
+        </article>
+      </div>
     </div>
-    <div class="testimonials-grid">
-      <div class="testi-card fade-up">
-        <div class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-        <p class="testi-text">&ldquo;Stratton completely realigned our digital strategy. Within 18 months, we tripled our online revenue and expanded into two new markets.&rdquo;</p>
-        <div class="testi-author">
-          <div class="testi-avatar" style="background:var(--accent)">MR</div>
-          <div>
-            <div class="testi-name">Michael Reynolds</div>
-            <div class="testi-role">CEO, TechVision Inc.</div>
-          </div>
-        </div>
-      </div>
-      <div class="testi-card fade-up">
-        <div class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-        <p class="testi-text">&ldquo;The collaboration was exceptionally professional. Their team navigated our complex restructuring flawlessly and delivered ahead of schedule.&rdquo;</p>
-        <div class="testi-author">
-          <div class="testi-avatar" style="background:#22c55e">SJ</div>
-          <div>
-            <div class="testi-name">Sarah Johnson</div>
-            <div class="testi-role">CFO, Apex Manufacturing</div>
-          </div>
-        </div>
-      </div>
-      <div class="testi-card fade-up">
-        <div class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-        <p class="testi-text">&ldquo;Pragmatic, hands-on, and always solution-oriented. Stratton has become our go-to partner for all strategic decisions.&rdquo;</p>
-        <div class="testi-author">
-          <div class="testi-avatar" style="background:var(--gold)">DW</div>
-          <div>
-            <div class="testi-name">David Walker</div>
-            <div class="testi-role">COO, Walker Logistics</div>
-          </div>
-        </div>
+  </section>
+
+  <section class="section" id="about" aria-labelledby="about-title">
+    <div class="wrap about">
+      <figure class="about-quote reveal">
+        <blockquote>Good strategy is not a document. It is a set of decisions a leadership team believes in&nbsp;&mdash; and can execute.</blockquote>
+        <p>Our founding principle</p>
+      </figure>
+      <div class="about-body reveal">
+        <p class="eyebrow">About the firm</p>
+        <h2 class="h2" id="about-title">Independent advice, built around <em>your</em> business</h2>
+        <p>Stratton Consulting is an independent strategy and management consulting firm. We work with leadership teams of growing and mid-sized companies who want rigorous, structured advice without the overhead, junior-heavy teams or one-size-fits-all playbooks.</p>
+        <p>Every engagement is led by experienced consultants who stay involved from the first conversation to the final result. We are deliberately selective about the work we take on, so each client receives our full attention.</p>
+        <ul class="principles">
+          <li><span>01</span><div><h3>Candor over comfort</h3><p>We tell you what the evidence says, even when it is not what anyone hoped to hear.</p></div></li>
+          <li><span>02</span><div><h3>Pragmatism over theory</h3><p>Recommendations are only useful if your organization can execute them.</p></div></li>
+          <li><span>03</span><div><h3>Confidential by default</h3><p>Your data, plans and people are handled with discretion. Mutual NDAs on request.</p></div></li>
+          <li><span>04</span><div><h3>Measurable outcomes</h3><p>We define success up front and report against it throughout the engagement.</p></div></li>
+        </ul>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ── CTA ── -->
-<section class="cta-section">
-  <div class="cta-inner fade-up">
-    <h2>Ready to take the next step?</h2>
-    <p>Schedule a complimentary consultation and discover how we can accelerate your business growth.</p>
-    <a href="#contact" class="btn-white">Free Consultation &rarr;</a>
-  </div>
-</section>
-
-<!-- ── CONTACT ── -->
-<section class="section" id="contact">
-  <div class="section-inner">
-    <div class="contact-grid">
-      <div class="fade-up">
-        <div class="section-label">Contact</div>
-        <h2 class="section-title">Let's talk about your <em>goals</em></h2>
-        <p class="section-desc">We look forward to hearing from you. Together, we'll find the best solution for your business.</p>
-        <div class="contact-cards">
-          <div class="c-card">
-            <div class="c-card-icon">&#x1F4DE;</div>
-            <div>
-              <strong>Phone</strong>
-              <span>+1 (212) 555-0147</span>
-            </div>
-          </div>
-          <div class="c-card">
-            <div class="c-card-icon">&#x2709;&#xFE0F;</div>
-            <div>
-              <strong>Email</strong>
-              <span>info@strattonconsulting.com</span>
-            </div>
-          </div>
-          <div class="c-card">
-            <div class="c-card-icon">&#x1F4CD;</div>
-            <div>
-              <strong>Office</strong>
-              <span>350 Fifth Avenue, Suite 4200<br/>New York, NY 10118</span>
-            </div>
-          </div>
-          <div class="c-card">
-            <div class="c-card-icon">&#x1F554;</div>
-            <div>
-              <strong>Business Hours</strong>
-              <span>Mon&ndash;Fri: 8:00 AM &ndash; 6:00 PM EST</span>
-            </div>
-          </div>
-        </div>
+  <section class="section section-paper" id="faq" aria-labelledby="faq-title">
+    <div class="wrap">
+      <div class="section-head-center reveal">
+        <p class="eyebrow">FAQ</p>
+        <h2 class="h2" id="faq-title">Frequently asked <em>questions</em></h2>
       </div>
-      <div class="fade-up">
-        <div class="contact-form">
-          <h3>Request a Consultation</h3>
-          <form id="contactForm" onsubmit="handleSubmit(event)">
-            <div class="form-row">
-              <div class="form-group">
-                <label>First Name *</label>
-                <input type="text" placeholder="John" required/>
-              </div>
-              <div class="form-group">
-                <label>Last Name *</label>
-                <input type="text" placeholder="Smith" required/>
-              </div>
-            </div>
-            <div class="form-group">
-              <label>Work Email *</label>
-              <input type="email" placeholder="john@company.com" required/>
-            </div>
-            <div class="form-group">
-              <label>Company</label>
-              <input type="text" placeholder="Your company"/>
-            </div>
-            <div class="form-group">
-              <label>Area of Interest</label>
-              <select>
-                <option value="" disabled selected>Select a service...</option>
-                <option>Strategy Consulting</option>
-                <option>Digital Transformation</option>
-                <option>Performance Management</option>
-                <option>Mergers &amp; Acquisitions</option>
-                <option>Organizational Development</option>
-                <option>Market Expansion</option>
+      <div class="faq reveal">
+        <details>
+          <summary>What kind of companies do you work with?</summary>
+          <p>We focus on growing and mid-sized companies&nbsp;&mdash; typically privately held, family-owned or investor-backed businesses, as well as business units of larger corporations. If your situation is different, we are still happy to talk.</p>
+        </details>
+        <details>
+          <summary>How does an engagement start?</summary>
+          <p>With a free, no-obligation consultation of 30&ndash;45 minutes. If there is a fit, we send a written proposal with scope, deliverables, timeline and fees, usually within a few business days.</p>
+        </details>
+        <details>
+          <summary>How are your fees structured?</summary>
+          <p>Most projects are quoted as a fixed fee for a clearly defined scope, so there are no surprises. Advisory work is billed as a monthly retainer. We will recommend the model that best fits your situation.</p>
+        </details>
+        <details>
+          <summary>Do you work remotely or on site?</summary>
+          <p>Both. We combine efficient remote collaboration with on-site workshops and leadership sessions wherever being in the room makes a difference.</p>
+        </details>
+        <details>
+          <summary>How do you handle confidential information?</summary>
+          <p>Confidentiality is standard in every engagement. We are happy to sign a mutual NDA before any sensitive information is shared, and we use client information only for the purposes of the engagement.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta" aria-labelledby="cta-title">
+    <div class="wrap cta-inner reveal">
+      <div>
+        <h2 class="h2" id="cta-title">Ready to talk about your next big decision?</h2>
+        <p>Book a free, no-obligation consultation. We will listen, ask the right questions and tell you honestly whether&nbsp;&mdash; and how&nbsp;&mdash; we can help.</p>
+      </div>
+      <div class="cta-actions">
+        <a class="btn btn-brass" href="#contact">Schedule a consultation <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
+        <a class="btn btn-ghost-light" href="mailto:{{EMAIL}}">Email us</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="contact" aria-labelledby="contact-title">
+    <div class="wrap contact">
+      <div class="contact-info reveal">
+        <p class="eyebrow">Contact</p>
+        <h2 class="h2" id="contact-title">Let&rsquo;s discuss your <em>goals</em></h2>
+        <p>Tell us briefly about your situation. We typically respond within one business day.</p>
+        <ul class="contact-list">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="M3 7l9 6 9-6"/></svg>
+            <div><strong>Email</strong><a href="mailto:{{EMAIL}}">{{EMAIL}}</a></div>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a1 1 0 0 1-1 1A16 16 0 0 1 4 5a1 1 0 0 1 1-1z"/></svg>
+            <div><strong>Phone</strong><a href="tel:{{PHONE_TEL}}">{{PHONE}}</a></div>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+            <div><strong>Office</strong><span>{{STREET}}<br>{{CITY_LINE}}<br>{{COUNTRY}}</span></div>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+            <div><strong>Office hours</strong><span>{{HOURS}}</span></div>
+          </li>
+        </ul>
+      </div>
+      <div class="reveal">
+        <form class="form" id="contact-form" data-recipient="{{EMAIL}}">
+          <h3>Request a consultation</h3>
+          <p>Fields marked <span class="req">*</span> are required.</p>
+          <div class="form-grid">
+            <div class="field"><label for="f-first">First name <span>*</span></label><input id="f-first" name="firstName" autocomplete="given-name" required></div>
+            <div class="field"><label for="f-last">Last name <span>*</span></label><input id="f-last" name="lastName" autocomplete="family-name" required></div>
+            <div class="field"><label for="f-email">Work email <span>*</span></label><input id="f-email" name="email" type="email" autocomplete="email" required></div>
+            <div class="field"><label for="f-company">Company</label><input id="f-company" name="company" autocomplete="organization"></div>
+            <div class="field"><label for="f-role">Role</label><input id="f-role" name="role" autocomplete="organization-title"></div>
+            <div class="field">
+              <label for="f-interest">Area of interest</label>
+              <select id="f-interest" name="interest">
+                <option value="">Select a topic</option>
+                <option>Corporate &amp; Growth Strategy</option>
+                <option>Operating Model &amp; Performance</option>
+                <option>Digital &amp; AI Strategy</option>
+                <option>Transformation Management</option>
+                <option>Transactions &amp; Integration</option>
+                <option>Market Entry &amp; Expansion</option>
                 <option>Other</option>
               </select>
             </div>
-            <div class="form-group">
-              <label>Message</label>
-              <textarea placeholder="Tell us briefly about your challenge..."></textarea>
+            <div class="field field-full"><label for="f-message">How can we help? <span>*</span></label><textarea id="f-message" name="message" required></textarea></div>
+            <label class="consent"><input type="checkbox" name="consent" required><span>I agree that the information I provide will be used to respond to my inquiry, as described in the <a href="/privacy">Privacy Policy</a>. <span class="req">*</span></span></label>
+            <div class="form-actions">
+              <button class="btn btn-primary" type="submit">Send inquiry <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></button>
+              <p class="form-status" id="form-status" aria-live="polite">Your inquiry will open in your email app, ready to send.</p>
             </div>
-            <button type="submit" class="btn-primary form-submit">Submit Request &rarr;</button>
-          </form>
-        </div>
+          </div>
+        </form>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ── FOOTER ── -->
+</main>
+
 <footer class="footer">
-  <div class="footer-inner">
+  <div class="wrap">
     <div class="footer-grid">
-      <div class="footer-brand">
-        <a href="#home" class="nav-logo">Stratton<span>.</span></a>
-        <p>Strategy and management consulting based in New York City. We partner with businesses to drive growth and transformation.</p>
+      <div class="footer-about">
+        <a class="brand" href="/" aria-label="Stratton Consulting – Home">
+          <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="0.5" y="0.5" width="33" height="33" rx="3" fill="#13263b" stroke="#2a4563"/><rect x="8" y="19" width="4" height="8" fill="#c9a66b"/><rect x="15" y="14" width="4" height="13" fill="#c9a66b"/><rect x="22" y="8" width="4" height="19" fill="#ffffff"/></svg>
+          <span class="brand-name">Stratton<small>Consulting</small></span>
+        </a>
+        <p>Independent strategy and management consulting for growing and mid-sized companies.</p>
+        <p>Stratton Consulting is a trade name of {{LEGAL_NAME}}.</p>
       </div>
       <div>
-        <h5>Services</h5>
-        <a href="#services">Strategy Consulting</a>
-        <a href="#services">Digital Transformation</a>
-        <a href="#services">Performance Management</a>
-        <a href="#services">M&amp;A Advisory</a>
+        <h4>Services</h4>
+        <ul>
+          <li><a href="/#services">Growth Strategy</a></li>
+          <li><a href="/#services">Operating Model</a></li>
+          <li><a href="/#services">Digital &amp; AI</a></li>
+          <li><a href="/#services">Transformation</a></li>
+          <li><a href="/#services">Transactions</a></li>
+        </ul>
       </div>
       <div>
-        <h5>Company</h5>
-        <a href="#about">About Us</a>
-        <a href="#process">Our Process</a>
-        <a href="#testimonials">Testimonials</a>
-        <a href="#contact">Contact</a>
+        <h4>Firm</h4>
+        <ul>
+          <li><a href="/#about">About</a></li>
+          <li><a href="/#approach">Approach</a></li>
+          <li><a href="/#sectors">Sectors</a></li>
+          <li><a href="/#faq">FAQ</a></li>
+          <li><a href="/#contact">Contact</a></li>
+        </ul>
       </div>
       <div>
-        <h5>Contact</h5>
-        <a href="#">+1 (212) 555-0147</a>
-        <a href="#">info@strattonconsulting.com</a>
-        <a href="#">New York, NY 10118</a>
+        <h4>Contact</h4>
+        <address>
+          {{LEGAL_NAME}}<br>
+          {{STREET}}<br>
+          {{CITY_LINE}}<br>
+          {{COUNTRY}}<br>
+          <a href="mailto:{{EMAIL}}">{{EMAIL}}</a><br>
+          <a href="tel:{{PHONE_TEL}}">{{PHONE}}</a>
+        </address>
       </div>
     </div>
-    <div class="footer-divider">
-      <p>&copy; 2026 Stratton Consulting LLC. All rights reserved.</p>
-      <p>Privacy Policy &nbsp;|&nbsp; Terms of Service</p>
+    <div class="footer-bottom">
+      <p>&copy; <span data-year>2026</span> {{LEGAL_NAME}}. All rights reserved.</p>
+      <ul class="footer-legal">
+        <li><a href="/privacy">Privacy Policy</a></li>
+        <li><a href="/terms">Terms of Use</a></li>
+        <li><a href="/legal-notice">Legal Notice</a></li>
+      </ul>
     </div>
   </div>
 </footer>
-
-<script>
-(function() {
-  var navbar = document.getElementById('navbar');
-  var hamburger = document.getElementById('hamburger');
-  var mobileNav = document.getElementById('mobileNav');
-  var mobileClose = document.getElementById('mobileClose');
-
-  window.addEventListener('scroll', function() {
-    navbar.classList.toggle('scrolled', window.scrollY > 40);
-  });
-
-  hamburger.addEventListener('click', function() {
-    mobileNav.classList.add('active');
-  });
-  mobileClose.addEventListener('click', function() {
-    mobileNav.classList.remove('active');
-  });
-  document.querySelectorAll('.mobile-link').forEach(function(link) {
-    link.addEventListener('click', function() {
-      mobileNav.classList.remove('active');
-    });
-  });
-
-  var observer = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-
-  document.querySelectorAll('.fade-up').forEach(function(el) {
-    observer.observe(el);
-  });
-})();
-
-function handleSubmit(e) {
-  e.preventDefault();
-  var btn = e.target.querySelector('button[type="submit"]');
-  btn.textContent = 'Sending...';
-  btn.disabled = true;
-  setTimeout(function() {
-    btn.textContent = 'Successfully sent!';
-    btn.style.background = '#22c55e';
-    setTimeout(function() {
-      btn.textContent = 'Submit Request →';
-      btn.style.background = '';
-      btn.disabled = false;
-      e.target.reset();
-    }, 3000);
-  }, 1500);
-}
-</script>
 </body>
 </html>
